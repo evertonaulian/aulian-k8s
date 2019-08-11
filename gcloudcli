@@ -1,0 +1,14 @@
+gcloud config set project aulian
+gcloud config set compute/zone us-central1-a
+gcloud container clusters get-credentials aulian-cluster
+
+kubectl create secret generic pgpassword --from-literal PGPASSWORD=mypgpassword123 
+
+curl -LO https://git.io/get_helm.sh
+chmod 700 get_helm.sh
+./get_helm.sh
+
+kubectl create serviceaccount --namespace kube-system tiller
+kubectl create create clusterrolebinding tiller-cluster-rule --clusterrole-cluster-admin --serviceaccount=kube-system:tiller
+
+helm itit --service-account tiller --upgrade
