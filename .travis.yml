@@ -18,7 +18,7 @@ before_install:
   - docker build -t evertonaulian/react-test -f ./client/Dockerfile.dev ./client
   
 script:
-  - docker run stephengrider/react-test rpm test -- --coverage
+  - docker run evertonaulian/react-test npm test -- --coverage
 
 deploy:
   provider: script
